@@ -1,0 +1,20 @@
+import mongoose from 'mongoose';
+
+const connectDB = async () => {
+  try {
+    const env = process.env.NODE_ENV;
+    let mongoURL;
+
+    if (env === 'production') mongoURL = process.env.MONGO_URL_PROD;
+    else if (env === 'test') mongoURL = process.env.MONGO_URL_TEST;
+    else mongoURL = process.env.MONGO_URL_DEV;
+
+    await mongoose.connect(mongoURL);
+    console.log(`MongoDB connected (${env})`);
+  } catch (error) {
+    console.error('MongoDB connection error:', error);
+    process.exit(1);
+  }
+};
+
+export {connectDB}

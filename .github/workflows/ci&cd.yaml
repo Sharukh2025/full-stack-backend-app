@@ -1,0 +1,49 @@
+name: CI-CD Manual Trigger
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ci:
+    name: Build & Test (CI)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+     
+
+  cd:
+    name: CD - Deploy to Render
+    runs-on: ubuntu-latest
+    needs: ci
+    if: github.ref == 'refs/heads/development' || github.ref == 'refs/heads/staging' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Deploy to Render based on branch
+        run: |
+          if [ "${GITHUB_REF##*/}" == "production" ] || [ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]; then
+            echo "Deploying to Production"
+            curl -X POST $RENDER_PROD_HOOK
+          elif [ "${GITHUB_REF##*/}" == "staging" ]; then
+            echo "Deploying to Staging"
+            curl -X POST $RENDER_STAGING_HOOK
+          elif [ "${GITHUB_REF##*/}" == "development" ]; then
+            echo "Deploying to Development"
+            curl -X POST $RENDER_DEV_HOOK
+          else
+            echo "No deployment configured for this branch"
+        env:
+          RENDER_PROD_HOOK: ${{ secrets.RENDER_PROD_HOOK }}
+          RENDER_STAGING_HOOK: ${{ secrets.RENDER_STAGING_HOOK }}
+          RENDER_DEV_HOOK: ${{ secrets.RENDER_DEV_HOOK }}

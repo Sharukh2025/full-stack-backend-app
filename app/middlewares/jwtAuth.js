@@ -3,10 +3,11 @@ import jwt from 'jsonwebtoken';
 const jwtAuth = (req, res, next) => {
   const env = process.env.NODE_ENV;
   let JWT_ACCESS_TOKEN_SECRET;
-  
+
   if (env === 'production') JWT_ACCESS_TOKEN_SECRET = process.env.JWT_ACCESS_TOKEN_SECRET_PROD;
-  else if (env === 'test') JWT_ACCESS_TOKEN_SECRET = process.env.JWT_ACCESS_TOKEN_SECRET_TEST;
-  else JWT_ACCESS_TOKEN_SECRET = process.env.JWT_ACCESS_TOKEN_SECRET_DEV;
+  else if (env === 'staging') JWT_ACCESS_TOKEN_SECRET = process.env.JWT_ACCESS_TOKEN_SECRET_STAGING;
+  else if (env === 'development') JWT_ACCESS_TOKEN_SECRET = process.env.JWT_ACCESS_TOKEN_SECRET_DEV;
+  else JWT_ACCESS_TOKEN_SECRET = process.env.JWT_ACCESS_TOKEN_SECRET_DEV_LOCAL;
   // Using authorization header
   // -----------------------------
   // const authHeader = req.headers.authorization;

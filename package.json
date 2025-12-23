@@ -2,11 +2,11 @@
   "name": "my-backend-project",
   "version": "1.0.0",
   "main": "app/app.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
     "start": "node app/app.js",
     "dev": "nodemon --inspect app/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --passWithNoTests --watchAll=false"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +26,8 @@
     "mongoose": "^9.0.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.11"
+    "jest": "^30.2.0",
+    "nodemon": "^3.1.11",
+    "supertest": "^7.1.4"
   }
 }

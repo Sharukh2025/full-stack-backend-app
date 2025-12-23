@@ -60,8 +60,9 @@ const env = process.env.NODE_ENV;
 
 let PORT;
 if (env === 'production') { PORT = process.env.PORT_PROD }
-else if (env === 'test') { PORT = process.env.PORT_TEST }
-else { PORT = process.env.PORT_DEV };
+else if (env === 'staging') { PORT = process.env.PORT_STAGING }
+else if (env === 'development') { PORT = process.env.PORT_DEV }
+else { PORT = process.env.PORT_DEV_LOCAL };
 
 /* ---------- Connecting to DB & Starting Server ---------- */
 const startServer = async () => {
@@ -73,7 +74,7 @@ const startServer = async () => {
     });
   } catch (error) {
     console.error('Failed to start server:', error);
-    process.exit(1); 
+    process.exit(1);
     //Force-Stop Node.js App - when somethig went wrong at starting the server
     //Ex:- DB connection error etc.
   }

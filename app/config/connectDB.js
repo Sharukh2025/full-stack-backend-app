@@ -6,8 +6,9 @@ const connectDB = async () => {
     let mongoURL;
 
     if (env === 'production') mongoURL = process.env.MONGO_URL_PROD;
-    else if (env === 'test') mongoURL = process.env.MONGO_URL_TEST;
-    else mongoURL = process.env.MONGO_URL_DEV;
+    else if (env === 'staging') mongoURL = process.env.MONGO_URL_STAGING;
+    else if (env === 'development') mongoURL = process.env.MONGO_URL_DEV;
+    else mongoURL = process.env.MONGO_URL_DEV_LOCAL
 
     await mongoose.connect(mongoURL);
     console.log(`MongoDB connected (${env})`);
@@ -17,4 +18,4 @@ const connectDB = async () => {
   }
 };
 
-export {connectDB}
+export { connectDB }

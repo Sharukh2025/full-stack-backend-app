@@ -1,12 +1,3 @@
-# VS Code settings
-.vscode/
-
-# Nodemon config
-nodemon.json
-
-# Notes folder
-notes/
-
 # Logs
 logs
 *.log

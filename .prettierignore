@@ -1,0 +1,21 @@
+# Node / dependencies
+node_modules
+
+# Docker
+Dockerfile.dev
+.dockerignore
+docker-compose.yml
+
+# Env files
+.env
+
+# Git / version control
+.git
+.github
+
+# Lock files
+package-lock.json
+yarn.lock
+
+# Misc files you don't want formatted
+README.md

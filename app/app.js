@@ -61,7 +61,6 @@ const env = process.env.NODE_ENV;
 let PORT;
 if (env === 'production') { PORT = process.env.PORT_PROD }
 else if (env === 'staging') { PORT = process.env.PORT_STAGING }
-else if (env === 'development') { PORT = process.env.PORT_DEV }
 else { PORT = process.env.PORT_DEV_LOCAL };
 
 /* ---------- Connecting to DB & Starting Server ---------- */

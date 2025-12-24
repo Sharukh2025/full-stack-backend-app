@@ -1,33 +1,12 @@
-name: Backend CI & Manual CD (Render)
+name: Backend CD (Render)
 
 on:
-  workflow_dispatch:  # manual deploy
+  workflow_dispatch:  # manual deploy only
 
 jobs:
-  continuous-integration:
-    name: Continuous Integration
+  backend-cd:
+    name: Continuous Delivery
     runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout source code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run tests
-        run: npm test
-
-  continuous-delivery:
-    name: Continuous Delivery (Render)
-    runs-on: ubuntu-latest
-    needs: continuous-integration
-    if: github.event_name == 'workflow_dispatch'  # only run CD manually
 
     steps:
       - name: Checkout repository

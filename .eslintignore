@@ -1,0 +1,25 @@
+# Node dependencies
+node_modules
+
+# Build / output folders
+dist
+build
+
+# Docker
+Dockerfile.dev
+.dockerignore
+docker-compose.yml
+
+# Env files
+.env
+
+# Git / version control
+.git
+.github
+
+# Lock files
+package-lock.json
+yarn.lock
+
+# Misc files
+README.md

@@ -1,0 +1,44 @@
+# Use official Node.js 20 Alpine image
+# Alpine is lightweight → smaller image size, faster pulls
+FROM node:20-alpine
+
+# Set the working directory inside the container to /app
+# All commands will run from this directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json (if present)
+# This enables Docker layer caching for npm install
+COPY package*.json ./
+
+# Install all backend dependencies inside the container
+RUN npm install
+
+# Copy the rest of the backend source code into the container
+# Includes app/, configs, etc.
+COPY . .
+
+# Expose the port your backend server listens on
+# Your Node/Express app runs on port 4000
+EXPOSE 4000
+
+# Start the backend in development mode using nodemon
+# Enables automatic restart on file changes
+CMD ["npm", "run", "dev"]
+
+# ------------------------------
+# Manual build command (optional)
+# Builds the backend dev image
+# docker build -f Dockerfile.dev -t backend-dev .
+# ------------------------------
+
+# ------------------------------
+# Manual run command (optional)
+# -p 4000:4000           -> expose backend API
+# -p 9229:9229           -> expose Node.js debugger
+# -v ${PWD}:/app         -> mount source code for hot reload
+# -v /app/node_modules   -> keep node_modules inside container
+# --env-file .env        -> load environment variables
+# npm run dev            -> start backend in dev mode
+#
+#docker run -it -p 4000:4000 -p 9229:9229 -v ${PWD}:/app -v /app/node_modules --env-file .env backend-dev npm run dev
+# ------------------------------

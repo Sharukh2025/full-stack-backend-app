@@ -5,8 +5,12 @@
   "type": "module",
   "scripts": {
     "start": "node app/app.js",
-    "dev": "nodemon --inspect app/app.js",
-    "test": "jest --passWithNoTests --watchAll=false"
+    "dev": "nodemon",
+    "test": "jest --passWithNoTests --watchAll=false",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format:check": "prettier --check \"app/**/*.{js,json,md}\"",
+    "format:fix": "prettier --write \"app/**/*.{js,json,md}\""
   },
   "keywords": [],
   "author": "",
@@ -26,8 +30,14 @@
     "mongoose": "^9.0.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "eslint": "^9.39.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-security": "^3.0.1",
+    "globals": "^16.5.0",
     "jest": "^30.2.0",
     "nodemon": "^3.1.11",
+    "prettier": "^3.7.4",
     "supertest": "^7.1.4"
   }
 }

@@ -6,7 +6,6 @@ const jwtAuth = (req, res, next) => {
 
   if (env === 'production') JWT_ACCESS_TOKEN_SECRET = process.env.JWT_ACCESS_TOKEN_SECRET_PROD;
   else if (env === 'staging') JWT_ACCESS_TOKEN_SECRET = process.env.JWT_ACCESS_TOKEN_SECRET_STAGING;
-  else if (env === 'development') JWT_ACCESS_TOKEN_SECRET = process.env.JWT_ACCESS_TOKEN_SECRET_DEV;
   else JWT_ACCESS_TOKEN_SECRET = process.env.JWT_ACCESS_TOKEN_SECRET_DEV_LOCAL;
   // Using authorization header
   // -----------------------------

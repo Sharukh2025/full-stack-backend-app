@@ -7,7 +7,6 @@ const connectDB = async () => {
 
     if (env === 'production') mongoURL = process.env.MONGO_URL_PROD;
     else if (env === 'staging') mongoURL = process.env.MONGO_URL_STAGING;
-    else if (env === 'development') mongoURL = process.env.MONGO_URL_DEV;
     else mongoURL = process.env.MONGO_URL_DEV_LOCAL
 
     await mongoose.connect(mongoURL);
